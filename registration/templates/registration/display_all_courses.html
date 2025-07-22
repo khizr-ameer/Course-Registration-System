@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Courses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #fff;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .course {
+            border-left: 5px solid #004d40;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        .course-code {
+            font-weight: bold;
+            color: #004d40;
+            margin-bottom: 5px;
+        }
+        .course-name {
+            font-weight: bold;
+            color: #004d40;
+            margin-bottom: 5px;
+        }
+        .statement {
+            font-style: italic;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .prerequisite {
+            color: #f90c0c;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #004d40;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #00251a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>List of Courses</h2>
+        {% if courses %}
+            {% for course in courses %}
+                <div class="course">
+                    <p class="statement">Course:</p>
+                    <p class="course-code">Course Code: {{ course.code }}</p>
+                    <p class="course-name">Course Name: {{ course.name }}</p>
+                    {% if course.prerequisite %}
+                        <p class="prerequisite">Prerequisite of: {{ course.prerequisite.name }} - {{ course.prerequisite.code }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No courses available.</p>
+        {% endif %}
+        <button onclick="window.location.href='{% url 'admin_panel' %}'">Back to Admin Panel</button>
+    </div>
+</body>
+</html>

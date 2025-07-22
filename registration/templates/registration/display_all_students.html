@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa; /* Changed background color */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00796b; /* Changed title color to green */
+        }
+        .student-info {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #00796b; /* Changed student info color to green */
+        }
+        .student-value {
+            color: #000;
+            font-weight: bold;
+        }
+        .fee-paid {
+            color: green;
+            font-weight: bold;
+        }
+        .fee-not-paid {
+            color: red;
+            font-weight: bold;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #00796b; /* Changed button color to green */
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #005a4c; /* Darker shade on hover */
+        }
+        .statement {
+            font-style: italic;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>List of Students</h2>
+        {% if students %}
+            {% for student in students %}
+                <div class="course" id="course{{ forloop.counter }}">
+                    {% if forloop.first %}
+                        <p class="statement">The <span style="color: black;">1st</span> student:</p>
+                    {% elif forloop.counter == 2 %}
+                        <p class="statement">The <span style="color: black;">2nd</span> student:</p>
+                    {% else %}
+                        <p class="statement">The <span style="color: black;">{{ forloop.counter }}th</span> student:</p>
+                    {% endif %}
+
+                    <p class="student-info">Student ID: <span class="student-value">{{ student.student_id }}</span></p>
+                    <p class="student-info">Name: <span class="student-value">{{ student.name }}</span></p>
+                    <p class="student-info">Fee Paid:
+                        <span class="{% if student.fees_paid %}fee-paid{% else %}fee-not-paid{% endif %}">
+                            {% if student.fees_paid %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </span>
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No students available.</p>
+        {% endif %}
+        <button id="back_to_home_button" onclick="window.location.href='{% url 'admin_panel' %}'">Back To Admin Panel</button>
+    </div>
+</body>
+</html>

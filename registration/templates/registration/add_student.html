@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        form {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="checkbox"] {
+            width: calc(100% - 22px); /* Adjusted to consider input padding */
+            padding: 10px;
+            margin-bottom: 15px; /* Increased margin */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"], button[type="button"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #004d40;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button[type="submit"]:hover, button[type="button"]:hover {
+            background-color: #00251a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Add a New Student in System</h2>
+        <form id="add_student_form" method="POST" action="{% url 'add_student' %}">
+            {% csrf_token %}
+            Student ID: <input type="text" name="student_id" required><br>
+            Name: <input type="text" name="name" required><br>
+            Fees Paid? <input type="checkbox" name="fees_paid">
+            
+            <br>
+            <button type="submit">Add Student</button>
+            <button type="button" onclick="window.location.href='{% url 'admin_panel' %}'">Back to Admin Panel</button>
+        </form>
+    </div>
+
+    <script>
+        // Display messages in dialog box
+        {% if messages %}
+            {% for message in messages %}
+                alert("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+
+</body>
+</html>

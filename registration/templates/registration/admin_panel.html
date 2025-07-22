@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .option {
+            width: calc(50% - 10px); /* Adjusted width for horizontal layout */
+            margin-bottom: 20px;
+            background-color: #004d40;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #00251a;
+        }
+        .option a {
+            display: block;
+            padding: 20px;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+        .back-to-home {
+            width: 100%; /* Full width for the button */
+            margin-bottom: 20px; /* Added space between the button and other options */
+            background-color: #263238; /* Dark blue color */
+        }
+        
+        .back-to-home:hover {
+            background-color: #37474f; /* Slightly lighter shade of blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        <div class="options-container">
+            <div class="option">
+                <a href="{% url 'create_course' %}">Create a New Course</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'delete_course' %}">Delete a Course</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'display_all_courses' %}">Display All Courses</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'add_student' %}">Add a New Student</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'delete_student' %}">Delete a Student</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'display_all_students' %}">Display All Students</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'enroll_student' %}">Enroll a Student in a Course</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'drop_registration' %}">Drop a Course Registration</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'display_enrolled_students' %}">Show Enrolled Students in a Course</a>
+            </div>
+            <div class="option">
+                <a href="{% url 'display_enrolled_courses' %}">Show Enrolled Courses of a Student</a>
+            </div>
+            <div class="option back-to-home"> <!-- Added back-to-home class -->
+                <a href="{% url 'home' %}">Back to Home</a>
+            </div>
+        </div>
+    </div>  
+</body>
+</html>

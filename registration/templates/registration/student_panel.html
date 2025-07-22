@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 20px; /* Increased margin */
+        }
+        a {
+            display: block;
+            padding: 20px;
+            background-color: #004d40;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        a:hover {
+            background-color: #00251a;
+        }
+        .back-to-home {
+            display: block;
+            padding: 20px;
+            background-color: #263238; /* Dark blue color */
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .back-to-home:hover {
+            background-color: #37474f; /* Slightly lighter shade of blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Panel</h1>
+        <ul>
+            <li>
+                <a href="{% url 'display_all_courses' %}">
+                    <div>Display All Courses</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'enroll_student' %}">
+                    <div>Enroll into Course</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'drop_registration' %}">
+                    <div>Drop a Course</div>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'display_enrolled_courses' %}">
+                    <div>Show Enrolled Courses</div>
+                </a>
+            </li>
+        </ul>
+        <a href="{% url 'home' %}" class="back-to-home">Back to Home</a>
+    </div>
+</body>
+</html>

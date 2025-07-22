@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrolled Courses</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa; /* Changed background color */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            margin-top: 150px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #00796b; /* Changed title color to green */
+            margin-bottom: 30px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button[type="submit"] {
+            padding: 15px 30px;
+            background-color: #00796b; /* Changed button color to green */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            outline: none;
+        }
+        button[type="submit"]:hover {
+            background-color: #005a4c; /* Darker shade on hover */
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin-bottom: 15px;
+            font-size: 16px;
+            line-height: 1.6;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+        li:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+        }
+        a {
+            display: block;
+            padding: 15px;
+            background-color: #00796b; /* Changed link color to green */
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        a:hover {
+            background-color: #005a4c; /* Darker shade on hover */
+        }
+        .fa {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Enrolled Courses for Student ID</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="student_id">Enter Student ID:</label><br>
+            <input type="text" id="student_id" name="student_id" required><br>
+            <button type="submit">Show Enrolled Courses</button>
+        </form>
+
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% elif enrolled_courses %}
+            <h3>Enrolled Courses of Student {{ student_name }} with Student ID {{ student_id }}</h3>
+            <ul>
+                {% for course_code, course_name in enrolled_courses %}
+                    <li><strong>Course code:</strong> {{ course_code }}</li>
+                    <li><strong>Course Name:</strong> {{ course_name }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <a href="{% url 'admin_panel' %}">Back to Admin Panel</a>
+    </div>
+</body>
+</html>

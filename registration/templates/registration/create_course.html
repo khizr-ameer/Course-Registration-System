@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Course</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px); /* Adjusted to consider input padding */
+            padding: 10px;
+            margin-bottom: 15px; /* Increased margin */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #004d40;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00251a;
+        }
+        @media screen and (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+            h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            input[type="text"] {
+                font-size: 14px;
+            }
+            button {
+                font-size: 18px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Create a New Course</h2>
+        <form id="create_course_form" method="POST" action="{% url 'create_course' %}">
+            {% csrf_token %}
+            
+            <label for="code">Course Code:</label>
+            <input type="text" id="code" name="code" required>
+            
+            <label for="name">Course Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="prerequisite_code">Prerequisite Course Code (Optional):</label>
+            <input type="text" id="prerequisite_code" name="prerequisite_code">
+            
+            <button id="create_course_button" type="submit">Create Course</button>
+            <button id="back_to_home_button" type="button" onclick="window.location.href='{% url 'admin_panel' %}'"> Back to Admin Panel</button>
+        </form>
+    </div>
+
+    <script>
+        // Get the form element
+        const form = document.getElementById('create_course_form');
+
+        // Add submit event listener
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Fetch the form data
+            const formData = new FormData(form);
+
+            // Send a POST request to the server
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData
+            });
+
+            // Check if the request was successful
+            if (response.ok) {
+                // Display success message
+                alert('Course created successfully!');
+                // Clear form fields if needed
+                form.reset();
+            } else {
+                // Display error message if request was not successful
+                alert('Failed to create course. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Course</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: #00796b;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: calc(100% - 22px); /* Adjusted to consider input padding */
+            padding: 10px;
+            margin-bottom: 15px; /* Increased margin */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #004d40; /* Changed color to match admin panel */
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00251a; /* Darker shade on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Delete a Created Course</h2>
+        <form id="delete_course_form" method="POST" action="{% url 'delete_course' %}">
+            {% csrf_token %}
+            Course Code: <input type="text" name="code" required><br>
+            <button type="submit">Delete Course</button>
+            <button id="back_to_home_button" onclick="window.location.href='{% url 'admin_panel' %}'">Back To Admin Panel</button>
+        </form>
+    </div>
+
+    <script>
+        // Get the form element
+        const form = document.getElementById('delete_course_form');
+
+        // Add submit event listener
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Fetch the form data
+            const formData = new FormData(form);
+
+            try {
+                // Send a POST request to the server
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Check if the request was successful
+                if (response.ok) {
+                    // Display success message
+                    alert('Course Deleted successfully!');
+                    // Clear form fields if needed
+                    form.reset();
+                } else {
+                    // Display error message if request was not successful
+                    alert('Failed to delete course. Please try again.');
+                }
+            } catch (error) {
+                // Display error message if an exception occurs
+                console.error('An error occurred:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+
+    </script>
+</body>
+</html>

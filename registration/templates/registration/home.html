@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 20px; /* Added padding */
+        }
+        .container {
+            max-width: 700px; /* Adjusted max-width */
+            margin: 0 auto;
+            background-color: #00796b;
+            margin-top: 175px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: #fff;
+        }
+        h1 {
+            margin-bottom: 40px; /* Increased margin */
+        }
+        .btn {
+            display: inline-block; /* Changed to inline-block */
+            width: 45%; /* Adjusted width */
+            padding: 15px;
+            margin: 10px; /* Adjusted margin */
+            background-color: #004d40;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px; /* Increased font size */
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #00251a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1> <strong> Welcome to Student Registration System </Strong></h1>
+        <a href="{% url 'student_panel' %}" class="btn">Enter as Student</a>
+        <a href="{% url 'admin_panel' %}" class="btn">Enter as Admin</a>
+    </div>
+</body>
+</html>
